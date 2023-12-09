@@ -21,7 +21,7 @@ const ImageUploadForPost: React.FC<ImageUploadPropsForPost> = ({
     const [base64, setBase64] = useState(value);
     const handleChange = useCallback((base64: string) => {
         onChange(base64);
-    }, [base64])
+    }, [onChange])
     
     const handledrop = useCallback((files: any) => {
         const file = files[0]

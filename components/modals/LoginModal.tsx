@@ -8,7 +8,7 @@ import {signIn} from "next-auth/react"
 
 const LoginModal = () => {
     const loginModal = useLoginModal();
-    const RegisterModal = useRegisterModal();
+    const registerModal = useRegisterModal();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState("");
@@ -19,8 +19,8 @@ const LoginModal = () => {
             return;
         } 
         loginModal.OnClose()
-        RegisterModal.OnOpen();
-    },[isLoading,loginModal,loginModal])
+        registerModal.OnOpen();
+    },[isLoading,loginModal,registerModal])
 
     const onSubmit = useCallback(async () => {
         try {
