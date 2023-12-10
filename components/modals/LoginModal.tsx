@@ -20,7 +20,7 @@ const LoginModal = () => {
         } 
         loginModal.OnClose()
         RegisterModal.OnOpen();
-    },[isLoading,loginModal,loginModal])
+    },[isLoading,loginModal,RegisterModal])
 
     const onSubmit = useCallback(async () => {
         try {

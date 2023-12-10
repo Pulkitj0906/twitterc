@@ -15,7 +15,7 @@ const SidebarTweetButton = () => {
   const onClick = useCallback(() => {
     console.log(currentUser)
     currentUser ? registerModal.OnOpen() : loginModal.OnOpen() 
-  },[loginModal])
+  },[loginModal,currentUser,registerModal])
 
   return (
     <div onClick={onClick}>
