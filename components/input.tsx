@@ -22,22 +22,20 @@ const Input: React.FC<InputProps> = ({
           type={type}
           className="
           w-full
-          p-2
-          align-text-center
-          e-4
-          text-lg
+          p-4 
+          text-lg 
+          bg-black 
           border-2
-          border-neutral-800
+          border-neutral-800 
           rounded-md
           outline-none
           text-white
           focus:border-sky-500
           focus:border-2
           transition
-          disabled:
-          ${disabled ? ' bg-neutral-900' : ' bg-black'}
+          disabled:bg-neutral-900
           disabled:opacity-70
-          disabled: cursor-not-allowed
+          disabled:cursor-not-allowed
           "
       />
   )
