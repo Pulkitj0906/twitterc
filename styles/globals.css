@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 :root {
-  @apply h-full bg-black
+  @apply h-full
 }
 
 body {
-  @apply h-full bg-black
+  @apply h-full 
+}
+
+*{
+  @apply transition-colors duration-100;
 }

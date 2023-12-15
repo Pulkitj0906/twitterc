@@ -70,10 +70,11 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
       onClick={goToPost}
           className='
             border-b-[1px]
-            border-neutral-800
+            dark:border-neutral-800
             p-5
             cursor-pointer
-            hover:bg-neutral-900
+            hover:bg-slate-100
+            dark:hover:bg-neutral-900
             transition
           '
       >
@@ -81,16 +82,16 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
               <Avatar userId={data.user.id} />
               <div>
                   <div className='flex flex-row items-center gap-2'>
-                      <p onClick={goToUser} className='text-white font-semibold cursor-pointer hover:underline'>{data.user.name}</p>
+                      <p onClick={goToUser} className='dark:text-white font-semibold cursor-pointer hover:underline'>{data.user.name}</p>
                       <span onClick={goToUser} className='text-neutral-500 cursor-pointer hover:underline hidden md:block'>@{data.user.username}</span>
                       <span className='text-neutral-500  text-sm'>{ createdAt}</span>
                       
                   </div>
-                  <div className='text-white mt-1'>
+                  <div className='dark:text-white mt-1'>
                       {data.body}
                   </div>
-                    <div className='text-white mt-1 w-full flex flex-row items-center'>
-                        {data.image ? <Image alt='' width={420} height={40} src={data.image || '/images/placeholder.png'} /> : ""}
+                    <div className='dark:text-white mt-1 w-full flex flex-row items-center h-full'>
+                        {data.image ? <Image alt='' width={200} height={0} src={data.image || '/images/placeholder.png'} /> : ""}
 
                   </div>
                   <div className='flex flex-row items-center mt-3 gap-10'>

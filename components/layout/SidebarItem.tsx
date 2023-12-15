@@ -53,12 +53,13 @@ const SidebarItem: React.FC<SiderbarItemProps> = ({
       items-center
       justify-center
       p-4
+      dark:hover:bg-black
       hover: bg-slate-300
       hover: bg-opacity-0
       cursor-pointer
       lg:hidden
       ">
-        <Icon size={28} color="white" />
+        <Icon size={28} className="text-black dark:text-white"/>
         {alert? <BsDot className='text-sky-500 absolute -top-4 left-0' size={70} /> :null}
       </div>
       <div className="
@@ -69,13 +70,14 @@ const SidebarItem: React.FC<SiderbarItemProps> = ({
       gap-4 
       p-4 
       rounded-full 
-      hover:bg-slate-300 
+      dark:hover:bg-opacity-20
+      hover:bg-slate-500
       hover:bg-opacity-10 
       cursor-pointer
       items-center  
       ">
-        <Icon size={32} color="white" />
-        <p className="hidden lg:block text-white text-xl">
+        <Icon size={32} className="text-black dark:text-white" />
+        <p className="hidden lg:block text-black dark:text-white text-xl">
           {label}
         </p>
         {alert? <BsDot className='text-sky-500 absolute -top-4 left-0' size={60} /> :null}

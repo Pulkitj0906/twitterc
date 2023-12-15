@@ -29,10 +29,10 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
     <div 
       className="
         border-b-[1px] 
-        border-neutral-800 
+        dark:border-neutral-800 
         p-5 
         cursor-pointer 
-        hover:bg-neutral-900 
+        dark:hover:bg-neutral-900 
         transition
       ">
       <div className="flex flex-row items-start gap-3">
@@ -64,7 +64,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
               {createdAt}
             </span>
           </div>
-          <div className="text-white mt-1">
+          <div className="dark:text-white mt-1">
             {data.body}
           </div>
         </div>

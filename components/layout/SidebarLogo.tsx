@@ -19,7 +19,8 @@ const SidebarLogo = () => {
             cursor-pointer
             transition
         ">
-            <BsTwitterX size={38} color="white" />
+            
+            <BsTwitterX size={38} className="text-black dark:text-white" />
         </div>
     )
 }
