@@ -61,9 +61,6 @@ const Sidebar:React.FC<sidebarProps> = ({darkMode,toggleDarkMode}) => {
                         <SidebarTweetButton />
                     </div>
                 <div className="">
-                        <div className="flex items-end justify-end">
-                        {/* <DarkModeToggle className="m-2 transition rounded-full" checked={darkMode} onChange={toggleDarkMode} size={70} speed={1.8} /> */}
-                        </div>
                         <div className="
                             relative
                             hidden 
@@ -78,15 +75,15 @@ const Sidebar:React.FC<sidebarProps> = ({darkMode,toggleDarkMode}) => {
                             cursor-pointer
                             items-center" >
                         
-                            <Avatar userId={currentUser?.id} />
-                            <div className="flex flex-col">
-                                <p className="hidden lg:block text-black dark:text-white font-semibold ">
-                                    {currentUser?.name}
-                                </p>
-                                <p className="text-neutral-400 text-sm">@{currentUser?.username}</p>
+                        {currentUser && <Avatar userId={currentUser?.id} />}
+                        {currentUser && <div className="flex flex-col">
+                            <p className="hidden lg:block text-black dark:text-white font-semibold ">
+                                {currentUser?.name}
+                            </p>
+                            <p className="text-neutral-400 text-sm">@{currentUser?.username}</p>
                                 
-                            </div>
-                        <Dropdown item1="My profile" hrefitem1={`/users/${currentUser?.id}`} item2="LogOut" darkMode={darkMode} toggleDarkMode={toggleDarkMode} onClickitem2={()=> signOut()} />
+                        </div>}
+                        <Dropdown item1={currentUser ?"My profile": ''} hrefitem1={`/users/${currentUser?.id}`} item2={currentUser?"LogOut":''} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onClickitem2={()=> signOut()} />
                             
                         </div>
                     </div>

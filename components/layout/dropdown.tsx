@@ -49,22 +49,22 @@ const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClick
                     'block px-4 py-2 text-sm dark:text-slate-300'
                   )}
                 ><div onClick={toggleDarkMode} className='flex flex-row items-center'>
-                    {darkMode?<FaSun className='active:text-white' />:<FaMoon />}
+                    {darkMode ? <FaSun className='active:text-white' /> : <FaMoon />}
                     
-                    {darkMode?<div className=' pl-4'>
-                        Light Theme
-                      </div>:
-                        <div className=' pl-4'>
+                    {darkMode ? <div className=' pl-4'>
+                      Light Theme
+                    </div> :
+                      <div className=' pl-4'>
                         Dark Theme
                       </div>
-                        }
+                    }
                     
-          </div>
+                  </div>
                 </a>
               )}
             </Menu.Item>
           </div>
-          <div className="py-1">
+          {item1 && <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <a
@@ -74,21 +74,21 @@ const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClick
                     'block px-4 py-2 text-sm dark:text-slate-300'
                   )}
                 >
-                <div className='flex flex-row items-center'>
+                  <div className='flex flex-row items-center'>
                     <FaUser />
                     <div className=' pl-4'>
                       {item1}
                     </div>
                     
-                </div>
+                  </div>
                   
                 </a>
               )}
             </Menu.Item>
             
-          </div>
+          </div>}
           
-          <div className="py-1">
+          {item2 && <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <a
@@ -107,7 +107,7 @@ const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClick
                 </a>
               )}
             </Menu.Item>
-          </div>
+          </div>}
         </Menu.Items>
       </Transition>
     </Menu>
