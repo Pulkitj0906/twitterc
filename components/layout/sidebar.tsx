@@ -83,7 +83,7 @@ const Sidebar:React.FC<sidebarProps> = ({darkMode,toggleDarkMode}) => {
                             <p className="text-neutral-400 text-sm">@{currentUser?.username}</p>
                                 
                         </div>}
-                        <Dropdown item1={currentUser ?"My profile": ''} hrefitem1={`/users/${currentUser?.id}`} item2={currentUser?"LogOut":''} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onClickitem2={()=> signOut()} />
+                        <Dropdown profilelogo={true} darkbutton={true} item1={currentUser ?"My profile": ''} hrefitem1={`/users/${currentUser?.id}`} item2={currentUser?"LogOut":''} darkMode={darkMode} toggleDarkMode={toggleDarkMode} onClickitem2={()=> signOut()} />
                             
                         </div>
                     </div>

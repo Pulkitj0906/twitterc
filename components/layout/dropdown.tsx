@@ -2,7 +2,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import React,{Fragment} from 'react'
 import { BsThreeDots } from 'react-icons/bs'
-import { FaMoon, FaSun, FaUser } from 'react-icons/fa'
+import { FaFlag, FaMoon, FaSun, FaUser } from 'react-icons/fa'
 import SidebarItem from './SidebarItem'
 import { BiLogOut } from 'react-icons/bi'
 
@@ -18,9 +18,13 @@ interface DropdownProps{
   darkMode?: boolean;
   onClickitem2?: () => void;
   toggleDarkMode?: () => void;
+  darkbutton?: boolean;
+  profilelogo?: boolean;
+  flaglogo?: boolean;
+
 }
 
-const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClickitem2,darkMode,toggleDarkMode})=> {
+const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClickitem2,darkMode,toggleDarkMode,darkbutton,profilelogo,flaglogo})=> {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -38,8 +42,8 @@ const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClick
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute dark:bg-stone-950 bottom-full right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-        <div className="py-1">
+        <Menu.Items className="absolute dark:bg-stone-950 bottom-full right-0 z-10 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        {darkbutton && <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <a
@@ -63,7 +67,7 @@ const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClick
                 </a>
               )}
             </Menu.Item>
-          </div>
+          </div>}
           {item1 && <div className="py-1">
             <Menu.Item>
               {({ active }) => (
@@ -75,7 +79,8 @@ const Dropdown:React.FC<DropdownProps>=({item1,hrefitem1,item2,hrefitem2,onClick
                   )}
                 >
                   <div className='flex flex-row items-center'>
-                    <FaUser />
+                    {profilelogo ?<FaUser /> :'' }
+                    {flaglogo?<FaFlag />:''}
                     <div className=' pl-4'>
                       {item1}
                     </div>

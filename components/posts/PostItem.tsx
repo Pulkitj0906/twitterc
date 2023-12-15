@@ -8,6 +8,8 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineRetweet } from 
 import useLike from '@/hooks/useLike';
 import Image from 'next/image'
 import { useCallback, useEffect, useState } from "react";
+import { BsThreeDots } from 'react-icons/bs';
+import Dropdown from '../layout/dropdown';
 
 interface PostItemProps{
     data: Record<string, any>;
@@ -67,7 +69,7 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
     return (
       <>
       <div
-      onClick={goToPost}
+    //   onClick={goToPost}
           className='
             border-b-[1px]
             dark:border-neutral-800
@@ -78,7 +80,8 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
             transition
           '
       >
-          <div className='flex flex-row items-start gap-3'>
+            <div className='flex flex-row items-start justify-between gap-3'>
+                    <div className='flex flex-row items-start gap-3 grow ' onClick={goToPost}>
               <Avatar userId={data.user.id} />
               <div>
                   <div className='flex flex-row items-center gap-2'>
@@ -114,7 +117,11 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
                           </p>
                       </div>
                   </div>
-              </div>
+                        </div>
+                    </div>
+                    <div className=' rounded-full  hover:bg-slate-200 dark:hover:bg-neutral-950'>
+                        <Dropdown flaglogo={true} item1='Report' />
+                    </div>
               
       </div>
             </div>
