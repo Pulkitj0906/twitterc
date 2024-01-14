@@ -17,12 +17,11 @@ const EmojiDisplay: React.FC<Props> = ({ emojis, handleEmojiClick, printedGroups
 
     // Create refs for each group section
     printedGroups.forEach((group) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         groupRefs[group] = useRef<HTMLDivElement>(null);
     });
 
-    useEffect(() => {
-        // Effect logic here, if needed
-    }, []); // Ensure to adjust the dependencies based on your actual use case
+     // Ensure to adjust the dependencies based on your actual use case
 
     // Function to scroll to the corresponding group section
     const scrollToGroup = (group: string) => {
