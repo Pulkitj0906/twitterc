@@ -1,5 +1,5 @@
 import {BsHouseFill, BsBellFill} from "react-icons/bs"
-import {FaUser} from "react-icons/fa"
+import {FaBookmark, FaUser} from "react-icons/fa"
 import SidebarLogo from "./SidebarLogo"
 import SidebarItem from "./SidebarItem"
 import {BiLogOut} from "react-icons/bi"
@@ -30,6 +30,13 @@ const Sidebar:React.FC<sidebarProps> = ({darkMode,toggleDarkMode}) => {
             label: "Notification",
             href: '/notifications',
             icon: BsBellFill,
+            auth: true,
+            alert: currentUser?.hasNotification,
+        },
+        {
+            label: "Bookmarks",
+            href: '/bookmarks',
+            icon: FaBookmark,
             auth: true,
             alert: currentUser?.hasNotification,
         },

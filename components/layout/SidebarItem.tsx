@@ -60,7 +60,7 @@ const SidebarItem: React.FC<SiderbarItemProps> = ({
       lg:hidden
       ">
         <Icon size={28} className="text-black dark:text-white"/>
-        {alert? <BsDot className='text-sky-500 absolute -top-4 left-0' size={70} /> :null}
+        {alert? <BsDot className='text-sky-500 absolute -top-4 left-3' size={70} /> :null}
       </div>
       <div className="
       relative
@@ -80,7 +80,7 @@ const SidebarItem: React.FC<SiderbarItemProps> = ({
         <p className="hidden lg:block text-black dark:text-white text-xl">
           {label}
         </p>
-        {alert? <BsDot className='text-sky-500 absolute -top-4 left-0' size={60} /> :null}
+        {alert? <BsDot className='text-sky-500 absolute -top-6 -left-0' size={80} /> :null}
 
       </div>
     </div>

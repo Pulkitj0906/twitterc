@@ -5,17 +5,19 @@ import { useCallback } from "react";
 import { FaFeather } from "react-icons/fa";
 import RegisterModal from "../modals/RegisterModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
+import useTweetModal from "@/hooks/useTweetModal";
 
 const SidebarTweetButton = () => {
   const router = useRouter();
   const loginModal = useLoginModal()
-  const registerModal=useRegisterModal()
-  const currentUser=useCurrentUser()
+  const registerModal = useRegisterModal()
+  const tweetModal=useTweetModal()
+  const{data: currentUser}=useCurrentUser()
   
   const onClick = useCallback(() => {
-    console.log(currentUser)
-    currentUser ? registerModal.OnOpen() : loginModal.OnOpen() 
-  },[loginModal,currentUser,registerModal])
+    currentUser? console.log('yes'):console.log('no')
+    currentUser ? tweetModal.OnOpen() : loginModal.OnOpen() 
+  },[loginModal,currentUser,tweetModal])
 
   return (
     <div onClick={onClick}>

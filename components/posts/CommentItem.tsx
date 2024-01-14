@@ -42,7 +42,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
             <p 
               onClick={goToUser} 
               className="
-                text-white 
+              text-neutral-800
                 font-semibold 
                 cursor-pointer 
                 hover:underline

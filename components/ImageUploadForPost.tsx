@@ -1,8 +1,9 @@
 import { fi } from "date-fns/locale";
 import Image from "next/image";
 import { eventNames } from "process";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { AiOutlineClose } from "react-icons/ai";
 import { FaRegImages } from "react-icons/fa";
 
 interface ImageUploadPropsForPost{
@@ -33,7 +34,10 @@ const ImageUploadForPost: React.FC<ImageUploadPropsForPost> = ({
         }
 
         reader.readAsDataURL(file)
-    },[handleChange])
+    }, [handleChange])
+    const handleClearImage = () => {
+        handleChange('');
+      };
 
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -45,6 +49,9 @@ const ImageUploadForPost: React.FC<ImageUploadPropsForPost> = ({
             'image/png': []
         }
     })
+    useEffect(() => {
+        setBase64(value);
+      }, [value]);
 
     return (
         <div
@@ -55,17 +62,20 @@ const ImageUploadForPost: React.FC<ImageUploadPropsForPost> = ({
             <input {...getInputProps()} />
             {
                 base64 ? (
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-center relative">
                         <Image
                         src={base64}
                         height='100'
                         width='100'
                         alt="Uploaded image"
                         />
+                        <div onClick={handleClearImage} className="hover:text-black absolute h-4 w-4 right-0 top-0">
+                            <AiOutlineClose />
+                        </div>
                     </div>
                 ) : (
                         
-                        <p className="mt-4 hover:color-sky-500"><FaRegImages size={20} color='' /></p>
+                        <p className="mt-4 hover:text-sky-500"><FaRegImages size={20} color='' /></p>
                 )
             }
       
