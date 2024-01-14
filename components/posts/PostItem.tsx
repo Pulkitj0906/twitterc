@@ -19,6 +19,8 @@ import useReportModal from '@/hooks/useReportModal';
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import { IoIosStats } from "react-icons/io";
 import { LuShare } from "react-icons/lu";
+import useBookmark from '@/hooks/useBookmark';
+import useView from '@/hooks/useView';
 
 interface PostItemProps {
     data: Record<string, any> | undefined;
@@ -27,7 +29,7 @@ interface PostItemProps {
     smallImage?: boolean;
 }
 
-const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots,smallImage }) => {
+const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots, smallImage }) => {
     const router = useRouter();
     const loginModal = useLoginModal();
     const ConfirmModal = useConfirmationModal()
@@ -36,7 +38,8 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots,smallImage 
 
     const { data: currentUser } = useCurrentUser();
     const { hasLiked, toggleLike } = useLike({ postId: data?.id, userId });
-    const [hasBookmarked, toggleBookmark] = useState(false);
+    const { hasBookmarked, toggleBookmark } = useBookmark({ postId: data?.id, userId });
+    const {hasViewed,toggleView}=useView({ postId: data?.id, userId })
 
     const [Postimage, SetPostimage] = useState('');
 
@@ -48,9 +51,11 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots,smallImage 
 
     useEffect(() => {
         SetPostimage(data?.image);
-
+        if (currentUser && !hasViewed) {
+            toggleView()
+        }
     }, [
-        data?.image,
+        data?.image,toggleView,currentUser,hasViewed
     ])
 
     const goToPost = useCallback(() => {
@@ -67,6 +72,22 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots,smallImage 
 
     }, [loginModal, currentUser, toggleLike])
 
+    const onBookmark = useCallback((event: any) => {
+        event.stopPropagation();
+        if (!currentUser) {
+            return loginModal.OnOpen()
+        }
+        toggleBookmark()
+    }, [currentUser, loginModal, toggleBookmark])
+    
+    const onView = useCallback((event: any) => {
+        event.stopPropagation();
+        if (!currentUser) {
+            return loginModal.OnOpen()
+        }
+        toggleView()
+    },[currentUser,toggleView,loginModal])
+
     const onRetweet = useCallback((event: any) => {
         event.stopPropagation()
         loginModal.OnOpen()
@@ -81,19 +102,8 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots,smallImage 
 
     const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
 
-    const onDelete = useCallback(async () => {
-        try {
-            await axios.delete(`api/posts/${data?.id}`);
-            toast.success('Tweet Deleted!')
-            mutatatePosts();
-        } catch (error) {
-            toast.error("Something went wrong!")
-        } finally {
-        }
-    }, [mutatatePosts,data?.id])
-
     const deleteButton = (currentUser?.id === data?.user?.id) || false
-
+    
     const deleteLogo = (
         <div className="text-red-700">
             <MdDelete size={18} />
@@ -190,17 +200,17 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots,smallImage 
                                             {data?.comments?.length || 0}
                                         </p>
                                     </div>
-                                    <div className='flex flex-row items-center text-neutral-500 gap-2 cursor-pointer group'>
+                                    <div onClick={onView} className='flex flex-row items-center text-neutral-500 gap-2 cursor-pointer group'>
                                         <IoIosStats className='group-hover:ring-[9px] ring-sky-500/10 group-hover:bg-sky-500/10 transition-all rounded-full group-hover:text-sky-500' size={20} />
                                         <p className='group-hover:text-sky-500'>
-                                            {data?.comments?.length || 0}
+                                            {data?.views?.length || 0}
                                         </p>
                                     </div>
                                     <div onClick={(e)=>{e.stopPropagation()}} className='flex flex-row items-center text-neutral-500 cursor-pointer group'>
                                         {hasBookmarked ?
-                                            <FaBookmark onClick={() => { toggleBookmark(!hasBookmarked) }} className='text-sky-500 hover:text-sky-500/50' size={16} />
+                                            <FaBookmark onClick={onBookmark} className='text-sky-500 hover:text-sky-500/50' size={16} />
                                             :
-                                            <FaRegBookmark onClick={() => { toggleBookmark(!hasBookmarked) }} className='hover:text-sky-500' size={16} />
+                                            <FaRegBookmark onClick={onBookmark} className='hover:text-sky-500' size={16} />
                                         }
                                         <Dropdown item1='Copy Link' item2='Share post via...' onClickitem2={handleShare} onClickitem1={handleCopy} copylogo={true} logo2={<LuShare className=''/>} sharebutton={true} />
                                     </div>

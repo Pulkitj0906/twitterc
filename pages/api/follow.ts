@@ -33,25 +33,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       updatedFollowingIds.push(userId);
 
       // NOTIFICATION PART START
-      try {
-        await prisma.notification.create({
+      await prisma.$transaction([
+        prisma.notification.create({
           data: {
-            body: 'Someone followed you!',
+            body: `${currentUser.name} followed you!`,
             userId,
+            senderId: currentUser.id,
+            postId:userId
           },
-        });
-
-        await prisma.user.update({
+        }),
+        prisma.user.update({
           where: {
             id: userId,
           },
           data: {
             hasNotification: true,
-          }
-        });
-      } catch (error) {
-        console.log(error);
-      }
+          },
+        }),
+      ]);
       // NOTIFICATION PART END
       
     }

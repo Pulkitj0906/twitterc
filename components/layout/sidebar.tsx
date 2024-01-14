@@ -38,7 +38,6 @@ const Sidebar:React.FC<sidebarProps> = ({darkMode,toggleDarkMode}) => {
             href: '/bookmarks',
             icon: FaBookmark,
             auth: true,
-            alert: currentUser?.hasNotification,
         },
         {
             label: "Profile",

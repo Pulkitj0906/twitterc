@@ -33,7 +33,7 @@ const Bookmarks = () => {
   return ( 
     <>
       <Header showBackArrow label="Bookmarks" />
-      <PostFeed onlyFollowingIds />
+      <PostFeed onlyBookmarked />
     </>
    );
 }

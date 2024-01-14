@@ -9,6 +9,10 @@ import useConfirmationModal from '@/hooks/useConfirmationModal';
 import Button from '../Button';
 import { MdDelete } from 'react-icons/md';
 import { AiOutlineClose } from 'react-icons/ai';
+interface ConfirmationModal {
+  OnOpen: (postId: string) => void;  // Adjust the type based on your actual implementation
+  // Add other properties if your useConfirmationModal hook returns more
+}
 
 interface ConfirmModalProps {
     onClosed?: () => void;

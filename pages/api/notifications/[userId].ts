@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from '@/libs/prismadb';
+import { Prisma} from "@prisma/client";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -8,16 +9,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const { userId } = req.query;
+    const { userId,senderId } = req.query;
 
     if (!userId || typeof userId !== 'string') {
       throw new Error('Invalid ID');
     }
+    const whereCondition: Prisma.NotificationWhereInput = {
+      userId,
+    };
+
+    if (senderId && typeof senderId === 'string') {
+      whereCondition.senderId = { equals: senderId };
+    }
+
+
 
     const notifications = await prisma.notification.findMany({
-      where: {
-        userId,
-      },
+      where:whereCondition,
       orderBy: {
         createdAt: 'desc'
       }
