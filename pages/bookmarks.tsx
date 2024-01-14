@@ -6,21 +6,26 @@ import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context);
+  try {
+    const session = await getSession(context);
 
-  if (!session) {
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        }
+      };
+    }
+
     return {
-      redirect: {
-        destination: '/',
-        permanent: false,
+      props: {
+        session
       }
-    }
-  }
-
-  return {
-    props: {
-      session
-    }
+    };
+  } catch (error) {
+    console.error("Error in getServerSideProps:", error);
+    throw error;
   }
 }
 

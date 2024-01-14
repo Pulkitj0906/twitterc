@@ -76,18 +76,11 @@ const Form: React.FC<FormProps> = ({
     }, []);
     setPrintedGroups(uniqueGroups);
   }, []);
-  const handleEmojiClick = (emoji: string) => {
-    console.log('Clicked emoji:', emoji);
-  
-    const input = document.getElementById('message') as HTMLTextAreaElement;
-    console.log('Textarea element:', input);
-  
+  const handleEmojiClick = (emoji: string) => {  
+    const input = document.getElementById('message') as HTMLTextAreaElement;  
     if (input) {
-      const cursorPosition = input.selectionStart || 0;
-      console.log('Cursor position:', cursorPosition);
-  
+      const cursorPosition = input.selectionStart || 0;  
       const messageValue = input.value;
-      console.log('Current message value:', messageValue);
   
       if (typeof cursorPosition === 'number') {
         const newValue =

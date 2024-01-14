@@ -89,7 +89,6 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots,smallImage 
         } catch (error) {
             toast.error("Something went wrong!")
         } finally {
-            console.log('done lil bro');
         }
     }, [mutatatePosts,data?.id])
 

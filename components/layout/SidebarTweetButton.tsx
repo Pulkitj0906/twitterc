@@ -15,7 +15,6 @@ const SidebarTweetButton = () => {
   const{data: currentUser}=useCurrentUser()
   
   const onClick = useCallback(() => {
-    currentUser? console.log('yes'):console.log('no')
     currentUser ? tweetModal.OnOpen() : loginModal.OnOpen() 
   },[loginModal,currentUser,tweetModal])
 
