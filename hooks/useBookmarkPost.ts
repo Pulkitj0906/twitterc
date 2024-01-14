@@ -10,7 +10,7 @@ const useBookmarkedPosts = () => {
     return [];
   }
 
-  const bookmarkedPosts = allPosts.filter((post) =>
+  const bookmarkedPosts = allPosts.filter((post:Record<string,any>) =>
     post.bookmarkIds.includes(currentUser.id)
   );
 
