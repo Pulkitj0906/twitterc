@@ -8,7 +8,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineRetweet } from 
 import useLike from '@/hooks/useLike';
 import Image from 'next/image'
 import { useCallback, useEffect, useState } from "react";
-import { BsThreeDots } from 'react-icons/bs';
+import { BsDot, BsThreeDots } from 'react-icons/bs';
 import Dropdown from '../layout/dropdown';
 import axios from 'axios'
 import toast from 'react-hot-toast';
@@ -163,10 +163,11 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId, AvoidDots, smallImage
                         <Avatar userId={data?.user?.id} />
                         <div className='w-full'>
                             <div className="w-full">
-                                <div className='flex flex-row items-center gap-2 w-full'>
-                                    <p onClick={goToUser} className='dark:text-white font-semibold cursor-pointer hover:underline'>{data?.user?.name}</p>
-                                    <span onClick={goToUser} className='text-neutral-500 cursor-pointer hover:underline hidden md:block'>@{data?.user?.username}</span>
-                                    <span className='text-neutral-500  text-sm'>{createdAt}</span>
+                                <div className='flex flex-row items-center justify-center  w-full'>
+                                    <p onClick={goToUser} className='dark:text-white mr-1 font-semibold cursor-pointer hover:underline'>{data?.user?.name}</p>
+                                    <span onClick={goToUser} className='text-neutral-500  cursor-pointer hover:underline hidden md:block text-xs'>@{data?.user?.username}</span>
+                                    <BsDot size={10} className='text-neutral-500 '/>
+                                    <span className='text-neutral-500 text-xs'>{createdAt} ago</span>
                                     {!AvoidDots && <div onClick={(e)=>{e.stopPropagation()}} className='ml-auto rounded-full  hover:bg-slate-200 dark:hover:bg-neutral-950'>
                                         {deleteButton ?
                                             <Dropdown flaglogo={true} item1='Report' onClickitem1={() => ReportModal.onOpen(dataForReport)} item2='Delete' logo2={deleteLogo} onClickitem2={() => ConfirmModal.OnOpen(postId)} />

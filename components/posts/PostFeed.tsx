@@ -2,6 +2,8 @@ import usePosts from "@/hooks/usePosts";
 import PostItem from "./PostItem";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useBookmarkedPosts from "@/hooks/useBookmarkPost";
+import { ClipLoader } from "react-spinners";
+import Loader from "../layout/Loader";
 
 interface PostFeedProps {
   userId?: string;
@@ -25,7 +27,15 @@ const PostFeed: React.FC<PostFeedProps> = ({ userId, onlyFollowingIds, onlyBookm
   if (onlyBookmarked && currentUser?.id) {
     filteredPosts = bookmarkedpost
   }
+  if (posts.isLoading ) {
+    return (
+        <div className='h-full'>
+            <Loader/>
+        </div>
+    )
+}
 
+ 
   return (
     <>
       {filteredPosts.map((post: Record<string, any>) => (

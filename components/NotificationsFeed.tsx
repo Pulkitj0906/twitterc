@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Avatar from "./Avatar";
 import usePosts from "@/hooks/usePosts";
 import PostItem from "./posts/PostItem";
+import Loader from "./layout/Loader";
 
 interface Notification {
   id: string;
@@ -33,7 +34,11 @@ const NotificationsFeed = () => {
 
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader/>
+      </div>
+    );
   }
 
   if (error) {
@@ -42,8 +47,10 @@ const NotificationsFeed = () => {
 
   if (fetchedNotifications.length === 0) {
     return (
-      <div className="text-neutral-600 text-center p-6 text-xl">
-        No notifications
+      <div className="text-neutral-600 flex justify-center items-center text-center p-6 text-xl">
+        <p className="text-sky-500">
+        No notifications yet...
+        </p>
       </div>
     );
   }
